@@ -1,0 +1,72 @@
+.quadrado {
+    width: 30%;
+    background: aqua;
+    padding-bottom: 30%; 
+    margin: 1.66%;
+    float: left;
+    border-radius: 15%;
+    transition: background-color 0.5s;
+    -webkit-transition: background-color 0.5s;
+    -moz-transition: background-color 0.5s;
+    
+}
+
+#conteiner {
+    margin: 20px auto;
+    max-width: 30em;
+    padding-bottom: 30%; 
+}
+
+#painel {
+    background-color: white;
+    text-align: center;
+}
+
+body {
+    background-color: #232323;
+    font-family: "Montserrat", "Avenir";
+    margin: 0;
+}
+
+h1 {
+    color: white;
+    text-align: center;
+    margin: 0;
+    background-color: steelblue;
+    font-weight: normal;
+    text-transform: uppercase;
+    line-height: 1.1;
+    padding: 20px 0;
+    
+}
+
+.selected {
+    color: white;
+    background-color: steelblue; 
+}
+#visor {
+    display: inline-block;
+    width: 20%;
+}
+
+#rgb {
+    font-size: 200%;
+}
+button {
+    border: none;
+    background: none;
+    text-transform: uppercase;
+    height: 200%;
+    font-weight: 700;
+    color: steelblue;
+    letter-spacing: 1px;
+    font-size: inherit;
+    transition: all 0.1s;
+    outline: none;
+
+
+}
+button:hover {
+    color: white;
+    background-color: steelblue; 
+}
