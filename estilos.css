@@ -62,6 +62,8 @@ button {
     letter-spacing: 1px;
     font-size: inherit;
     transition: all 0.1s;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
     outline: none;
 
 

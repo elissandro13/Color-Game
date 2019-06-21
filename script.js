@@ -1,87 +1,80 @@
 let numQuadrados = 6;
-let coresQuadrados = sortearCores(numQuadrados);
+let coresQuadrados = [];
+let corSelecionada;
 
 let quadrados = document.querySelectorAll(".quadrado");
-let corSelecionada = selecionarCor();
 let corSpan = document.querySelector("#rgb");
 let visorEl = document.querySelector('#visor');
 let h1El = document.querySelector("h1");
 let mudarBtn = document.getElementById("reset");
-let easyBtn = document.getElementById("easy");
-let hardBtn = document.getElementById("hard");
+let modeBtn = document.querySelectorAll(".mode");
 
-easyBtn.addEventListener("click", function(){
-    easyBtn.classList.add("selected");
-    hardBtn.classList.remove("selected");
-    numQuadrados = 3;
-    coresQuadrados = sortearCores(numQuadrados);
-    corSelecionada = selecionarCor();
-    corSpan.textContent = corSelecionada;
+
+init();
+
+
+function init(){
     for (let i = 0; i < quadrados.length; i++) {
-        if(coresQuadrados[i]){
-            quadrados[i].style.backgroundColor = coresQuadrados[i];
-        }
-        else {
-            quadrados[i].style.display = "none";
-        }
+        quadrados[i].style.backgroundColor = coresQuadrados[i];
+    
+        quadrados[i].addEventListener("click", function(){
+            let corClicada = this.style.backgroundColor;
+    
+            if(corClicada === corSelecionada){
+               visorEl.textContent = "Correto!";
+               mudarCorTodosQuadrados(corSelecionada);
+               h1El.style.backgroundColor = corSelecionada;
+               mudarBtn.textContent = "Play again?";
+            }
+            else {
+                quadrados[i].style.backgroundColor = "#232323";
+                visorEl.textContent = "Errado";
+            }
+        });
+    }
+
+    for (let i = 0; i < modeBtn.length; i++) {
+        modeBtn[i].addEventListener("click", function() {
+            modeBtn[0].classList.remove("selected");
+            modeBtn[1].classList.remove("selected");
+            this.classList.add("selected");
+            this.textContent === "Hard" ? numQuadrados = 6: numQuadrados = 3;
+            coresQuadrados = sortearCores(numQuadrados);
+    
+            reset();
+        });
+        
         
     }
 
+    reset();
 
-
-
-});
-
-hardBtn.addEventListener("click", function(){
-    hardBtn.classList.add("selected");    
-    easyBtn.classList.remove("selected");
-    numQuadrados = 6;
-    coresQuadrados = sortearCores(numQuadrados);
-    corSelecionada = selecionarCor();
-    corSpan.textContent = corSelecionada;
-    for (let i = 0; i < quadrados.length; i++) {
-        if(coresQuadrados[i]){
-            quadrados[i].style.backgroundColor = coresQuadrados[i];
-            quadrados[i].style.display = "block";
-        }
-        
-    }
-
-});
-
-corSpan.textContent = corSelecionada;
-
-for (let i = 0; i < coresQuadrados.length; i++) {
-    quadrados[i].style.backgroundColor = coresQuadrados[i];
-
-    quadrados[i].addEventListener("click", function(){
-        let corClicada = this.style.backgroundColor;
-
-        if(corClicada === corSelecionada){
-           visorEl.textContent = "Correto!";
-           mudarCorTodosQuadrados(corSelecionada);
-           h1El.style.backgroundColor = corSelecionada;
-           mudarBtn.textContent = "Play again?";
-        }
-        else {
-            quadrados[i].style.backgroundColor = "black";
-            visorEl.textContent = "Errado";
-        }
-    });
 }
-
-mudarBtn.addEventListener("click", function(){
+function reset(){
     coresQuadrados = sortearCores(numQuadrados);
     corSelecionada = selecionarCor();
     corSpan.textContent = corSelecionada;
     visorEl.textContent = "";
     h1El.style.backgroundColor = "steelblue";
     mudarBtn.textContent = "New Colors"; 
-    for (let i = 0; i < coresQuadrados.length; i++) {
-        quadrados[i].style.backgroundColor = coresQuadrados[i];
-    }    
-});
+    for (let i = 0; i < quadrados.length; i++) {
+        if(coresQuadrados[i]){
+            quadrados[i].style.display = "block";
+            quadrados[i].style.backgroundColor = coresQuadrados[i];
 
+        }
+        else {
+            quadrados[i].style.display = "none";
+        }
+    }  
+
+}
+
+
+mudarBtn.addEventListener("click", function(){
+    reset();
+});
+   
 
 function mudarCorTodosQuadrados(cor){
 
